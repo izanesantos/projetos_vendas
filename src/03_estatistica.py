@@ -93,3 +93,126 @@ vendas_dia_semana = (
 
 print("\n8. Quantidade de vendas por dia da semana:")
 print(vendas_dia_semana)
+
+# Estatística descritiva das vendas
+print("\nEstatística descritiva:")
+
+print("Média:", df["valor_total"].mean())
+print("Mediana:", df["valor_total"].median())
+print("Mínimo:", df["valor_total"].min())
+print("Máximo:", df["valor_total"].max())
+print("Desvio padrão:", df["valor_total"].std())
+
+import matplotlib.pyplot as plt
+
+# Gráfico de faturamento por filial
+faturamento_filial = df.groupby("Filial")["valor_total"].sum()
+
+faturamento_filial.plot(kind="bar")
+
+plt.title("Faturamento por filial")
+plt.xlabel("Filial")
+plt.ylabel("Faturamento (R$)")
+plt.tight_layout()
+
+plt.savefig(
+    r"C:\Users\izane\OneDrive\Área de Trabalho\ESTUDO.SCTEC\projetos_vendas\resultados\faturamento_por_filial.png"
+)
+
+plt.show()
+
+# Gráfico de quantidade de vendas por filial
+quantidade_filial = df["Filial"].value_counts()
+
+quantidade_filial.plot(kind="bar")
+
+plt.title("Quantidade de vendas por filial")
+plt.xlabel("Filial")
+plt.ylabel("Quantidade de vendas")
+plt.tight_layout()
+
+plt.savefig(
+    r"C:\Users\izane\OneDrive\Área de Trabalho\ESTUDO.SCTEC\projetos_vendas\resultados\quantidade_vendas_por_filial.png"
+)
+
+plt.show()
+
+
+# Gráfico de faturamento por linha de produto
+faturamento_produto = (
+    df.groupby("linha_produto")["valor_total"]
+    .sum()
+    .sort_values(ascending=False)
+)
+
+faturamento_produto.plot(kind="bar")
+
+plt.title("Faturamento por linha de produto")
+plt.xlabel("Linha de produto")
+plt.ylabel("Faturamento (R$)")
+plt.xticks(rotation=45, ha="right")
+plt.tight_layout()
+
+plt.savefig(
+    r"C:\Users\izane\OneDrive\Área de Trabalho\ESTUDO.SCTEC\projetos_vendas\resultados\faturamento_por_produto.png"
+)
+
+plt.show()
+
+# Gráfico de avaliação média por produto
+avaliacao_produto = (
+    df.groupby("linha_produto")["Avaliação"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+avaliacao_produto.plot(kind="bar")
+
+plt.title("Avaliação média por linha de produto")
+plt.xlabel("Linha de produto")
+plt.ylabel("Avaliação média")
+plt.xticks(rotation=45, ha="right")
+plt.tight_layout()
+
+plt.savefig(
+    r"C:\Users\izane\OneDrive\Área de Trabalho\ESTUDO.SCTEC\projetos_vendas\resultados\avaliacao_media_produto.png"
+)
+
+plt.show()
+
+# Gráfico de formas de pagamento
+forma_pagamento = df["forma_pagamento"].value_counts()
+
+forma_pagamento.plot(kind="bar")
+
+plt.title("Formas de pagamento utilizadas")
+plt.xlabel("Forma de pagamento")
+plt.ylabel("Quantidade de vendas")
+plt.tight_layout()
+
+plt.savefig(
+    r"C:\Users\izane\OneDrive\Área de Trabalho\ESTUDO.SCTEC\projetos_vendas\resultados\formas_pagamento.png"
+)
+
+plt.show()
+
+# Gráfico de vendas por dia da semana
+vendas_dia_semana = (
+    df["data_venda"]
+    .dt.day_name()
+    .value_counts()
+)
+
+vendas_dia_semana.plot(kind="bar")
+
+plt.title("Quantidade de vendas por dia da semana")
+plt.xlabel("Dia da semana")
+plt.ylabel("Quantidade de vendas")
+plt.tight_layout()
+
+plt.savefig(
+    r"C:\Users\izane\OneDrive\Área de Trabalho\ESTUDO.SCTEC\projetos_vendas\resultados\vendas_por_dia_semana.png"
+)
+
+plt.show()
+
